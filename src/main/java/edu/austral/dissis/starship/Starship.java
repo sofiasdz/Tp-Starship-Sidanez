@@ -2,7 +2,7 @@ package edu.austral.dissis.starship;
 
 import edu.austral.dissis.starship.base.vector.Vector2;
 
-public class Starship {
+public class Starship implements Movable,GameObject {
     private final Vector2 position;
     private final Vector2 direction;
 
