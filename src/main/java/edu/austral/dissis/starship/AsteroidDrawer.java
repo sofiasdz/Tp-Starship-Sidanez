@@ -33,9 +33,10 @@ import static edu.austral.dissis.starship.base.vector.Vector2.vector;
             graphics.translate(position.getX(), position.getY());
             graphics.rotate(angle);
 
-//        graphics.image(image, getImageCenter(), getImageCenter());
+
             graphics.fill(255, 0, 0);
-            graphics.rect(SQUARE_SIZE / -2f, SQUARE_SIZE / -2f, SQUARE_SIZE, SQUARE_SIZE);
+           // graphics.rect(SQUARE_SIZE / -2f, SQUARE_SIZE / -2f, SQUARE_SIZE, SQUARE_SIZE);
+            //graphics.image(image, getImageCenter(), getImageCenter());
 
 
             graphics.popMatrix();

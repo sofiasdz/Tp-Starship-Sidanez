@@ -23,7 +23,7 @@ public class CustomGameFramework implements GameFramework {
     private AsteroidDrawer asteroidDrawer;
     private Starship starship1 = new Starship(vector(200, 200), vector(0, -1));
     private Starship starship2 = new Starship(vector(400, 400), vector(0, -1));
-    private Asteroid asteroid= new Asteroid(vector(600,600),vector(0,-1));
+    private Asteroid asteroid= new Asteroid(vector(300,300),vector(0,-1));
 
     private final CollisionEngine engine = new CollisionEngine();
 
@@ -32,8 +32,8 @@ public class CustomGameFramework implements GameFramework {
         windowsSettings
             .setSize(500, 500);
 
-        starshipDrawer = new StarshipDrawer(imageLoader.load("spaceship.png"));
-        asteroidDrawer=new AsteroidDrawer(imageLoader.load("helloKitty.png"));
+        starshipDrawer = new StarshipDrawer(imageLoader.load("spaceship.png" ));
+       asteroidDrawer=new AsteroidDrawer(imageLoader.load("helloKitty.png"));
     }
 
     @Override
@@ -87,9 +87,8 @@ public class CustomGameFramework implements GameFramework {
     }
 
     private void updateAsteroid(){
-        while(true){
             asteroid=asteroid.rotate(PConstants.PI / 60);
-        }
+
     }
 
     @Override
