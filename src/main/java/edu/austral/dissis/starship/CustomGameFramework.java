@@ -22,8 +22,8 @@ public class CustomGameFramework implements GameFramework {
     private StarshipDrawer starshipDrawer;
     private AsteroidDrawer asteroidDrawer;
     private Starship starship1 = new Starship(vector(200, 200), vector(0, -1));
-    private Starship starship2 = new Starship(vector(400, 400), vector(0, -1));
     private Asteroid asteroid= new Asteroid(vector(300,300),vector(0,-1));
+    private Control control= new MyStarshipControl(starship1, new MySpaceShipControlConfiguration());
 
     private final CollisionEngine engine = new CollisionEngine();
 
@@ -32,13 +32,13 @@ public class CustomGameFramework implements GameFramework {
         windowsSettings
             .setSize(500, 500);
 
-        starshipDrawer = new StarshipDrawer(imageLoader.load("spaceship.png" ));
+        starshipDrawer = new StarshipDrawer(imageLoader.load("spaceship.png"));
        asteroidDrawer=new AsteroidDrawer(imageLoader.load("helloKitty.png"));
     }
 
     @Override
     public void draw(PGraphics graphics, float timeSinceLastDraw, Set<Integer> keySet) {
-        updateStarship(keySet);
+        starship1=(Starship)control.updateMovable(keySet);
         updateAsteroid();
         drawStarships(graphics);
         drawAsteroids(graphics);
@@ -52,7 +52,6 @@ public class CustomGameFramework implements GameFramework {
     private void checkCollisions() {
         final List<SquareCollisionable> collisionables = asList(
                 starshipDrawer.getCollisionable(starship1),
-                starshipDrawer.getCollisionable(starship2),
                 asteroidDrawer.getCollisionable(asteroid)
         );
 
@@ -61,30 +60,12 @@ public class CustomGameFramework implements GameFramework {
 
     private void drawStarships(PGraphics graphics) {
         starshipDrawer.draw(graphics, starship1);
-        starshipDrawer.draw(graphics, starship2);
     }
     private void drawAsteroids(PGraphics graphics) {
         asteroidDrawer.draw(graphics, asteroid);
 
     }
 
-    private void updateStarship(Set<Integer> keySet) {
-        if (keySet.contains(PConstants.UP)) {
-            starship1 = starship1.moveForward(2);
-        }
-
-        if (keySet.contains(PConstants.DOWN)) {
-            starship1 = starship1.moveBackwards(2);
-        }
-
-        if (keySet.contains(PConstants.LEFT)) {
-            starship1 = starship1.rotate(-1 * PConstants.PI / 60);
-        }
-
-        if (keySet.contains(PConstants.RIGHT)) {
-            starship1 = starship1.rotate(PConstants.PI / 60);
-        }
-    }
 
     private void updateAsteroid(){
             asteroid=asteroid.rotate(PConstants.PI / 60);

@@ -34,8 +34,8 @@ public class StarshipDrawer {
         graphics.rotate(angle);
 
         graphics.fill(255, 0, 0);
-        //graphics.rect(SQUARE_SIZE / -2f, SQUARE_SIZE / -2f, SQUARE_SIZE, SQUARE_SIZE);
-        //graphics.image(image, getImageCenter(), getImageCenter());
+        graphics.rect(SQUARE_SIZE / -2f, SQUARE_SIZE / -2f, SQUARE_SIZE, SQUARE_SIZE);
+        graphics.image(image, getImageCenter(), getImageCenter());
 
 
         graphics.popMatrix();

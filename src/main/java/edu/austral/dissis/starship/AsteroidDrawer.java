@@ -10,7 +10,7 @@ import java.awt.geom.Rectangle2D;
 
 import static edu.austral.dissis.starship.base.vector.Vector2.vector;
 
-    public class AsteroidDrawer {
+    public class AsteroidDrawer  {
         private static final float IMAGE_SIZE = 100;
         public static final int SQUARE_SIZE = 20;
 
@@ -35,8 +35,8 @@ import static edu.austral.dissis.starship.base.vector.Vector2.vector;
 
 
             graphics.fill(255, 0, 0);
-           // graphics.rect(SQUARE_SIZE / -2f, SQUARE_SIZE / -2f, SQUARE_SIZE, SQUARE_SIZE);
-            //graphics.image(image, getImageCenter(), getImageCenter());
+           graphics.rect(SQUARE_SIZE / -2f, SQUARE_SIZE / -2f, SQUARE_SIZE, SQUARE_SIZE);
+           graphics.image(image, getImageCenter(), getImageCenter());
 
 
             graphics.popMatrix();
