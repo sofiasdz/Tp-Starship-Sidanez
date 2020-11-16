@@ -5,6 +5,7 @@ import edu.austral.dissis.starship.base.vector.Vector2;
 public class Starship implements Movable,GameObject {
     private final Vector2 position;
     private final Vector2 direction;
+    Weapon weapon;
 
     public Starship(Vector2 position, Vector2 direction) {
         this.position = position;
@@ -26,4 +27,12 @@ public class Starship implements Movable,GameObject {
     public Vector2 getPosition() { return position; }
 
     public Vector2 getDirection() { return direction; }
+
+    public Weapon getWeapon() {
+        return weapon;
+    }
+
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
 }

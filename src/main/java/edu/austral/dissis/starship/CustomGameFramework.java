@@ -1,17 +1,11 @@
 package edu.austral.dissis.starship;
-
-import edu.austral.dissis.starship.base.collision.CollisionEngine;
 import edu.austral.dissis.starship.base.framework.GameFramework;
 import edu.austral.dissis.starship.base.framework.ImageLoader;
 import edu.austral.dissis.starship.base.framework.WindowSettings;
-import edu.austral.dissis.starship.base.vector.Vector2;
 import processing.core.PConstants;
 import processing.core.PGraphics;
 import processing.event.KeyEvent;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 
 import static edu.austral.dissis.starship.base.vector.Vector2.vector;
@@ -22,10 +16,11 @@ public class CustomGameFramework implements GameFramework {
     private StarshipDrawer starshipDrawer;
     private AsteroidDrawer asteroidDrawer;
     private Starship starship1 = new Starship(vector(200, 200), vector(0, -1));
+    private  StandardAmmunition standardAmmunition= new StandardAmmunition(vector(200, 200), vector(0, -1));
     private Asteroid asteroid= new Asteroid(vector(300,300),vector(0,-1));
     private Control control= new MyStarshipControl(starship1, new MySpaceShipControlConfiguration());
+    private CollisionChecker collisionChecker;
 
-    private final CollisionEngine engine = new CollisionEngine();
 
     @Override
     public void setup(WindowSettings windowsSettings, ImageLoader imageLoader) {
@@ -33,7 +28,12 @@ public class CustomGameFramework implements GameFramework {
             .setSize(500, 500);
 
         starshipDrawer = new StarshipDrawer(imageLoader.load("spaceship.png"));
-       asteroidDrawer=new AsteroidDrawer(imageLoader.load("helloKitty.png"));
+       asteroidDrawer=new AsteroidDrawer(imageLoader.load("asteroid.png"));
+
+       collisionChecker= new CollisionChecker(asList(
+                starshipDrawer.getCollisionable(starship1),
+                asteroidDrawer.getCollisionable(asteroid)
+        ));
     }
 
     @Override
@@ -42,21 +42,12 @@ public class CustomGameFramework implements GameFramework {
         updateAsteroid();
         drawStarships(graphics);
         drawAsteroids(graphics);
-        checkCollisions();
+        collisionChecker.checkCollisions();
     }
 
 
 
 
-
-    private void checkCollisions() {
-        final List<SquareCollisionable> collisionables = asList(
-                starshipDrawer.getCollisionable(starship1),
-                asteroidDrawer.getCollisionable(asteroid)
-        );
-
-        engine.checkCollisions(collisionables);
-    }
 
     private void drawStarships(PGraphics graphics) {
         starshipDrawer.draw(graphics, starship1);

@@ -6,13 +6,9 @@ import processing.core.PConstants;
 import processing.core.PGraphics;
 import processing.core.PImage;
 
-import java.awt.geom.Rectangle2D;
-
-import static edu.austral.dissis.starship.base.vector.Vector2.vector;
-
     public class AsteroidDrawer  {
-        private static final float IMAGE_SIZE = 100;
-        public static final int SQUARE_SIZE = 20;
+        private static final float IMAGE_SIZE = 900;
+        public static final int SQUARE_SIZE = 50;
 
         private final PImage image;
 
