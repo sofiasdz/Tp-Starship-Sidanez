@@ -1,8 +1,5 @@
 package edu.austral.dissis.starship;
-
-import edu.austral.dissis.starship.base.collision.Collisionable;
 import edu.austral.dissis.starship.base.vector.Vector2;
-import processing.core.PConstants;
 import processing.core.PGraphics;
 import processing.core.PImage;
 
@@ -20,10 +17,9 @@ import processing.core.PImage;
             return IMAGE_SIZE / -2f;
         }
 
-        public void draw(PGraphics graphics, Asteroid asteroid) {
-            final Vector2 position = asteroid.getPosition();
-            final float angle = calculateRotation(asteroid);
-
+        public void draw(PGraphics graphics,Asteroid asteroid) {
+            final Vector2 position= asteroid.getPosition();
+            final float angle= asteroid.calculateRotation();
             graphics.pushMatrix();
 
             graphics.translate(position.getX(), position.getY());
@@ -40,17 +36,6 @@ import processing.core.PImage;
             graphics.fill(0, 255, 0);
         }
 
-        private float calculateRotation(Asteroid asteroid) {
-            return asteroid.getDirection().rotate(PConstants.PI / 2).getAngle();
-        }
-
-        public SquareCollisionable getCollisionable(Asteroid asteroid) {
-            return new SquareCollisionable(
-                    SQUARE_SIZE,
-                    calculateRotation(asteroid),
-                    asteroid.getPosition()
-            );
-        }
     }
 
 

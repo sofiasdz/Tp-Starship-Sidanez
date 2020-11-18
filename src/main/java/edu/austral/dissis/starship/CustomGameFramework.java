@@ -15,9 +15,9 @@ public class CustomGameFramework implements GameFramework {
 
     private StarshipDrawer starshipDrawer;
     private AsteroidDrawer asteroidDrawer;
-    private Starship starship1 = new Starship(vector(200, 200), vector(0, -1));
+    private Starship starship1 = new Starship(vector(200, 200), vector(0, -1),50);
     private  StandardAmmunition standardAmmunition= new StandardAmmunition(vector(200, 200), vector(0, -1));
-    private Asteroid asteroid= new Asteroid(vector(300,300),vector(0,-1));
+    private Asteroid asteroid= new Asteroid(vector(300,300),vector(0,-1),50);
     private Control control= new MyStarshipControl(starship1, new MySpaceShipControlConfiguration());
     private CollisionChecker collisionChecker;
 
@@ -31,8 +31,7 @@ public class CustomGameFramework implements GameFramework {
        asteroidDrawer=new AsteroidDrawer(imageLoader.load("asteroid.png"));
 
        collisionChecker= new CollisionChecker(asList(
-                starshipDrawer.getCollisionable(starship1),
-                asteroidDrawer.getCollisionable(asteroid)
+                starship1,asteroid
         ));
     }
 
@@ -50,7 +49,7 @@ public class CustomGameFramework implements GameFramework {
 
 
     private void drawStarships(PGraphics graphics) {
-        starshipDrawer.draw(graphics, starship1);
+        starshipDrawer.draw(graphics,starship1);
     }
     private void drawAsteroids(PGraphics graphics) {
         asteroidDrawer.draw(graphics, asteroid);

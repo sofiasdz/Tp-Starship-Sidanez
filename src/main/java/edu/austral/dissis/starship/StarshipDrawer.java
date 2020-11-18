@@ -1,14 +1,8 @@
 package edu.austral.dissis.starship;
-
-import edu.austral.dissis.starship.base.collision.Collisionable;
 import edu.austral.dissis.starship.base.vector.Vector2;
 import processing.core.PConstants;
 import processing.core.PGraphics;
 import processing.core.PImage;
-
-import java.awt.geom.Rectangle2D;
-
-import static edu.austral.dissis.starship.base.vector.Vector2.vector;
 
 public class StarshipDrawer {
     private static final float IMAGE_SIZE = 200;
@@ -24,10 +18,9 @@ public class StarshipDrawer {
         return IMAGE_SIZE / -2f;
     }
 
-    public void draw(PGraphics graphics, Starship starship) {
-        final Vector2 position = starship.getPosition();
-        final float angle = calculateRotation(starship);
-
+    public void draw(PGraphics graphics,Starship starship) {
+        final Vector2 position=starship.getPosition();
+        final float angle= starship.calculateRotation();
         graphics.pushMatrix();
 
         graphics.translate(position.getX(), position.getY());
@@ -47,11 +40,5 @@ public class StarshipDrawer {
         return starship.getDirection().rotate(PConstants.PI / 2).getAngle();
     }
 
-    public SquareCollisionable getCollisionable(Starship starship) {
-        return new SquareCollisionable(
-                SQUARE_SIZE,
-                calculateRotation(starship),
-                starship.getPosition()
-        );
-    }
+
 }
