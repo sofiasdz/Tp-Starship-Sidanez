@@ -39,8 +39,10 @@ public class CustomGameFramework implements GameFramework {
     public void draw(PGraphics graphics, float timeSinceLastDraw, Set<Integer> keySet) {
         starship1=(Starship)control.updateMovable(keySet);
         updateAsteroid();
-        drawStarships(graphics);
-        drawAsteroids(graphics);
+         DrawerComponent drawerComponent=new DrawerComponent(graphics,starshipDrawer);
+         DrawerComponent drawerComponent1= new DrawerComponent(graphics,asteroidDrawer);
+         drawerComponent.draw(starship1);
+         drawerComponent.draw(asteroid);
         collisionChecker.checkCollisions();
     }
 
@@ -48,13 +50,7 @@ public class CustomGameFramework implements GameFramework {
 
 
 
-    private void drawStarships(PGraphics graphics) {
-        starshipDrawer.draw(graphics,starship1);
-    }
-    private void drawAsteroids(PGraphics graphics) {
-        asteroidDrawer.draw(graphics, asteroid);
 
-    }
 
 
     private void updateAsteroid(){

@@ -43,13 +43,7 @@ import processing.core.PImage;
             return ammunition.getDirection().rotate(PConstants.PI / 2).getAngle();
         }
 
-        public SquareCollisionable getCollisionable(Ammunition ammunition) {
-            return new SquareCollisionable(
-                    SQUARE_SIZE,
-                    calculateRotation(ammunition),
-                    ammunition.getPosition()
-            );
-        }
+
 
     }
 
