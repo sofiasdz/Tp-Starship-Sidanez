@@ -42,7 +42,7 @@ public class CustomGameFramework implements GameFramework {
          DrawerComponent drawerComponent=new DrawerComponent(graphics,starshipDrawer);
          DrawerComponent drawerComponent1= new DrawerComponent(graphics,asteroidDrawer);
          drawerComponent.draw(starship1);
-         drawerComponent.draw(asteroid);
+         drawerComponent1.draw(asteroid);
         collisionChecker.checkCollisions();
     }
 
