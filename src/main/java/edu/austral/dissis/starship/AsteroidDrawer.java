@@ -4,17 +4,18 @@ import processing.core.PGraphics;
 import processing.core.PImage;
 
     public class AsteroidDrawer extends PGraphicsDrawer {
-        private static final float IMAGE_SIZE = 900;
+        private static final float IMAGE_SIZE = 90;
         public static final int SQUARE_SIZE = 50;
 
         private final PImage image;
 
         public AsteroidDrawer(PImage image) {
-            this.image = image;
+            image.resize(90,90);
+            this.image=image;
         }
 
        float getImageCenter() {
-            return IMAGE_SIZE / -2f;
+            return IMAGE_SIZE/ -2f;
         }
 
         public void draw(PGraphics graphics,GameObject gameObject) {
@@ -27,8 +28,8 @@ import processing.core.PImage;
 
 
             graphics.fill(255, 0, 0);
-           graphics.rect(SQUARE_SIZE / -2f, SQUARE_SIZE / -2f, SQUARE_SIZE, SQUARE_SIZE);
-           graphics.image(image, getImageCenter(), getImageCenter());
+            graphics.rect(SQUARE_SIZE / -2f, SQUARE_SIZE / -2f, SQUARE_SIZE, SQUARE_SIZE);
+            graphics.image(image, getImageCenter(), getImageCenter());
 
 
             graphics.popMatrix();
