@@ -6,6 +6,8 @@ import processing.core.PConstants;
 import processing.core.PGraphics;
 import processing.event.KeyEvent;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import static edu.austral.dissis.starship.base.vector.Vector2.vector;
@@ -16,8 +18,8 @@ public class CustomGameFramework implements GameFramework {
     private StarshipDrawer starshipDrawer;
     private AsteroidDrawer asteroidDrawer;
     private AmmunitionDrawer ammunitionDrawer;
-    private StandardAmmunition ammunition=new StandardAmmunition(vector(200, 200), vector(0, -1),10);
-    private  Weapon weapon=new StandardWeapon(vector(200, 200), vector(0, -1),ammunition);
+        private List<Ammunition> ammo= new ArrayList<Ammunition>();
+    private  Weapon weapon=new StandardWeapon(vector(200, 200), vector(0, -1),ammo);
     private Starship starship1 = new Starship(vector(200, 200), vector(0, -1),50,weapon);
     private Asteroid asteroid= new Asteroid(vector(300,300),vector(0,-1),50);
     ControlConfiguration controlConfiguration=new MySpaceShipControlConfiguration();
@@ -35,7 +37,7 @@ public class CustomGameFramework implements GameFramework {
        ammunitionDrawer=new AmmunitionDrawer(imageLoader.load("bullet.png"));
 
        collisionChecker= new CollisionChecker(asList(
-                starship1,asteroid,ammunition
+                starship1,asteroid
         ));
     }
 
@@ -43,17 +45,21 @@ public class CustomGameFramework implements GameFramework {
     public void draw(PGraphics graphics, float timeSinceLastDraw, Set<Integer> keySet) {
         starship1=(Starship)control.updateMovable(keySet);
         weapon= starship1.weapon;
-        ammunition=(StandardAmmunition)starship1.weapon.ammunition;
+        ammo=starship1.weapon.ammo;
 
 
 
         updateAsteroid();
+        updateAmmo();
          DrawerComponent drawerComponent=new DrawerComponent(graphics,starshipDrawer);
          DrawerComponent drawerComponent1= new DrawerComponent(graphics,asteroidDrawer);
          DrawerComponent drawerComponent2=new DrawerComponent(graphics,ammunitionDrawer);
          drawerComponent.draw(starship1);
          drawerComponent1.draw(asteroid);
-         drawerComponent2.draw(ammunition);
+        for (int i = 0; i <ammo.size() ; i++) {
+            drawerComponent2.draw(ammo.get(i));
+
+        }
         collisionChecker.checkCollisions();
     }
 
@@ -76,6 +82,17 @@ public class CustomGameFramework implements GameFramework {
 
     @Override
     public void keyReleased(KeyEvent event) {
+
+    }
+    private void updateAmmo(){
+                for (int i = 0; i <ammo.size() ; i++) {
+                    Ammunition ammunition=ammo.get(i);
+                    ammunition=(Ammunition)ammunition.moveForward(10);
+                    ammo.set(i,ammunition);
+
+            }
+
+
 
     }
 }

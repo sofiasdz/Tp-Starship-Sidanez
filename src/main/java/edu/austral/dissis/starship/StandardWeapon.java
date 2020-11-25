@@ -2,11 +2,13 @@ package edu.austral.dissis.starship;
 
 import edu.austral.dissis.starship.base.vector.Vector2;
 
-public class StandardWeapon  extends Weapon{
-    public StandardWeapon(Vector2 position, Vector2 direction, StandardAmmunition ammunition) {
+import java.util.List;
+
+public class StandardWeapon  extends Weapon {
+    public StandardWeapon(Vector2 position, Vector2 direction, List<Ammunition> ammo) {
         this.position = position;
         this.direction = direction;
-        this.ammunition = ammunition;
+        this.ammo = ammo;
     }
 
     @Override
@@ -21,11 +23,25 @@ public class StandardWeapon  extends Weapon{
 
 
     public void shoot() {
-        for (int i = 0; i <10 ; i++) {
+        Ammunition ammunition = new StandardAmmunition(position, direction, 10);
+        ammo.add(ammunition);
 
-        ammunition=(StandardAmmunition)ammunition.moveForward(3);
-        }
     }
 
 
+
+    @Override
+    public GameObject rotate(float angle) {
+         return new StandardWeapon(position,direction.rotate(angle),ammo);
+    }
+
+    @Override
+    public GameObject moveForward(float speed) {
+       return new StandardWeapon(position.add(direction.multiply(speed)),direction,ammo);
+    }
+
+    @Override
+    public GameObject moveBackwards(float speed) {
+         return new StandardWeapon(position.subtract(direction.multiply(speed)), direction,ammo);
+    }
 }

@@ -32,6 +32,7 @@ public class MyStarshipControl extends Control {
         }
         if (keySet.contains(controlConfiguration.getShootkey())) {
             movable = (StarshipInterface) movable.shoot();
+            keySet.remove(controlConfiguration.getShootkey());
             return movable;
         }
         return movable;
