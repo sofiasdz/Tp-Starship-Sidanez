@@ -22,7 +22,6 @@ public class CustomGameFramework implements GameFramework {
     private Asteroid asteroid= new Asteroid(vector(300,300),vector(0,-1),50);
     ControlConfiguration controlConfiguration=new MySpaceShipControlConfiguration();
     private Control control= new MyStarshipControl(starship1, controlConfiguration);
-    private Control control2=new WeaponControl(weapon,controlConfiguration);
     private CollisionChecker collisionChecker;
 
 
@@ -42,11 +41,9 @@ public class CustomGameFramework implements GameFramework {
 
     @Override
     public void draw(PGraphics graphics, float timeSinceLastDraw, Set<Integer> keySet) {
-
-        ammunition=(StandardAmmunition) control2.updateMovable(keySet);
-       weapon=new StandardWeapon(weapon.position, weapon.direction, ammunition);
-       starship1=new Starship(starship1.getPosition(),starship1.getDirection(),50,weapon);
         starship1=(Starship)control.updateMovable(keySet);
+        weapon= starship1.weapon;
+        ammunition=(StandardAmmunition)starship1.weapon.ammunition;
 
 
 

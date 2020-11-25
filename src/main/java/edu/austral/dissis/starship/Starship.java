@@ -24,17 +24,21 @@ public class Starship  extends StarshipInterface implements  Collisionable{
     }
 
     public Starship rotate(float angle) {
-        return new Starship(position, direction.rotate(angle),size,weapon);
+        return new Starship(position, direction.rotate(angle),size,
+                new StandardWeapon(position,direction.rotate(angle),
+                        new StandardAmmunition(position,direction.rotate(angle),10)));
     }
 
     public Starship moveForward(float speed) {
-        return new Starship(position.add(direction.multiply(speed)), direction,size,weapon);
+        return new Starship(position.add(direction.multiply(speed)), direction, size,
+                new StandardWeapon(position.add(direction.multiply(speed)),direction,
+                        new StandardAmmunition(position.add(direction.multiply(speed)),direction,10)));
     }
 
     public Starship moveBackwards(float speed) {
-        return new Starship(position.subtract(direction.multiply(speed)), direction,size,weapon);
-    }
+        return new Starship(position.subtract(direction.multiply(speed)), direction, size, new StandardWeapon(position.subtract(direction.multiply(speed)), direction, new StandardAmmunition(position.subtract(direction.multiply(speed)), direction, 10)));
 
+    }
     public Vector2 getPosition() { return position; }
 
     public Vector2 getDirection() { return direction; }
@@ -73,8 +77,11 @@ public class Starship  extends StarshipInterface implements  Collisionable{
     }
 
     @Override
-    public void shoot() {
-       weapon.shoot();
+    public Starship shoot() {
+         weapon.shoot();
+        return new Starship(position,direction,size,weapon);
+
+
 
 
 

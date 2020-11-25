@@ -21,12 +21,11 @@ public class StandardWeapon  extends Weapon{
 
 
     public void shoot() {
-         ammunition=(StandardAmmunition)ammunition.moveForward(30);
+        for (int i = 0; i <10 ; i++) {
 
-
+        ammunition=(StandardAmmunition)ammunition.moveForward(3);
+        }
     }
 
-    public void setAmmunition(Ammunition ammunition){
-        this.ammunition=ammunition;
-    }
+
 }
