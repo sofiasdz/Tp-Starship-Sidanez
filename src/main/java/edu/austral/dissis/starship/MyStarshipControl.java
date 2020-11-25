@@ -5,11 +5,13 @@ import processing.core.PConstants;
 import java.util.Set;
 
 public class MyStarshipControl extends Control {
-    private  Movable movable;
+    private Movable movable;
     private final ControlConfiguration controlConfiguration;
 
-    public Movable updateMovable(Set<Integer> keySet){
-        if (keySet.contains(controlConfiguration.getMoveFowardKey())){
+    public Movable updateMovable(Set<Integer> keySet) {
+
+
+        if (keySet.contains(controlConfiguration.getMoveFowardKey())) {
             movable = (Movable) movable.moveForward(2);
             return movable;
         }
@@ -20,7 +22,7 @@ public class MyStarshipControl extends Control {
         }
 
         if (keySet.contains(controlConfiguration.getRotateLeftKey())) {
-            movable= (Movable) movable.rotate(-1 * PConstants.PI / 60);
+            movable = (Movable) movable.rotate(-1 * PConstants.PI / 60);
             return movable;
         }
 
@@ -30,7 +32,12 @@ public class MyStarshipControl extends Control {
         }
         return movable;
 
-    }
+}
+
+
+
+
+
 
     public MyStarshipControl(Movable movable, ControlConfiguration controlConfiguration) {
         this.movable = movable;

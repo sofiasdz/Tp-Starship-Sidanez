@@ -5,21 +5,23 @@ import processing.core.PGraphics;
 import processing.core.PImage;
 
 
-    public class AmmunitionDrawer {
-        private static final float IMAGE_SIZE = 5;
+    public class AmmunitionDrawer extends PGraphicsDrawer {
+        private static final float IMAGE_SIZE = 10;
         public static final int SQUARE_SIZE = 20;
 
         private final PImage image;
 
         public AmmunitionDrawer(PImage image) {
+            image.resize(10,10);
             this.image = image;
         }
 
-        private float getImageCenter() {
+         float getImageCenter() {
             return IMAGE_SIZE / -2f;
         }
 
-        public void draw(PGraphics graphics, Ammunition ammunition) {
+        @Override
+        public void draw(PGraphics graphics, GameObject ammunition) {
             final Vector2 position = ammunition.getPosition();
             final float angle = calculateRotation(ammunition);
 

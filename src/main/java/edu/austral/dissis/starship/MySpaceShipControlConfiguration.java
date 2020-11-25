@@ -28,6 +28,6 @@ public class MySpaceShipControlConfiguration implements ControlConfiguration
 
     @Override
     public Object getShootkey() {
-     return null;
+     return PConstants.SHIFT;
     }
 }

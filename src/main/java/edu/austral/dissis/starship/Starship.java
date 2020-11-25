@@ -9,29 +9,30 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
 import java.awt.geom.Rectangle2D;
 
-public class Starship implements Movable,GameObject, Collisionable {
+public class Starship  extends StarshipInterface implements  Collisionable{
     private final Vector2 position;
     private final Vector2 direction;
     Weapon weapon;
     int size;
 
-    public Starship(Vector2 position, Vector2 direction,int size) {
+    public Starship(Vector2 position, Vector2 direction,int size,Weapon weapon) {
         this.position = position;
         this.direction = direction.asUnitary();
         this.size=size;
+        this.weapon=weapon;
 
     }
 
     public Starship rotate(float angle) {
-        return new Starship(position, direction.rotate(angle),size);
+        return new Starship(position, direction.rotate(angle),size,weapon);
     }
 
     public Starship moveForward(float speed) {
-        return new Starship(position.add(direction.multiply(speed)), direction,size);
+        return new Starship(position.add(direction.multiply(speed)), direction,size,weapon);
     }
 
     public Starship moveBackwards(float speed) {
-        return new Starship(position.subtract(direction.multiply(speed)), direction,size);
+        return new Starship(position.subtract(direction.multiply(speed)), direction,size,weapon);
     }
 
     public Vector2 getPosition() { return position; }
@@ -70,4 +71,14 @@ public class Starship implements Movable,GameObject, Collisionable {
         System.out.println("Collisioned with " + collisionable);
 
     }
+
+    @Override
+    public void shoot() {
+       weapon.shoot();
+
+
+
+    }
+
+
 }
