@@ -23,7 +23,7 @@ public class StandardWeapon  extends Weapon {
 
 
     public void shoot() {
-        Ammunition ammunition = new StandardAmmunition(position, direction, 10);
+        Ammunition ammunition = new StandardAmmunition(position, direction, 20);
         ammo.add(ammunition);
 
     }

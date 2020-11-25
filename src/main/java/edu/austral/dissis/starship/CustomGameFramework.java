@@ -18,6 +18,8 @@ public class CustomGameFramework implements GameFramework {
     private StarshipDrawer starshipDrawer;
     private AsteroidDrawer asteroidDrawer;
     private AmmunitionDrawer ammunitionDrawer;
+    private ScoreDrawer scoreDrawer;
+    private Score score= new Score(vector(800,800),vector(0,-1),"khali",188);
         private List<Ammunition> ammo= new ArrayList<Ammunition>();
     private  Weapon weapon=new StandardWeapon(vector(200, 200), vector(0, -1),ammo);
     private Starship starship1 = new Starship(vector(200, 200), vector(0, -1),50,weapon);
@@ -30,11 +32,12 @@ public class CustomGameFramework implements GameFramework {
     @Override
     public void setup(WindowSettings windowsSettings, ImageLoader imageLoader) {
         windowsSettings
-            .setSize(500, 500);
+            .setSize(1280, 720);
 
         starshipDrawer = new StarshipDrawer(imageLoader.load("spaceship.png"));
        asteroidDrawer=new AsteroidDrawer(imageLoader.load("asteroid.png"));
        ammunitionDrawer=new AmmunitionDrawer(imageLoader.load("bullet.png"));
+       scoreDrawer=new ScoreDrawer(imageLoader.load("bullet.png"));
 
        collisionChecker= new CollisionChecker(asList(
                 starship1,asteroid
@@ -54,8 +57,10 @@ public class CustomGameFramework implements GameFramework {
          DrawerComponent drawerComponent=new DrawerComponent(graphics,starshipDrawer);
          DrawerComponent drawerComponent1= new DrawerComponent(graphics,asteroidDrawer);
          DrawerComponent drawerComponent2=new DrawerComponent(graphics,ammunitionDrawer);
+         DrawerComponent drawerComponent3= new DrawerComponent(graphics,scoreDrawer);
          drawerComponent.draw(starship1);
          drawerComponent1.draw(asteroid);
+         drawerComponent3.draw(score);
         for (int i = 0; i <ammo.size() ; i++) {
             drawerComponent2.draw(ammo.get(i));
 

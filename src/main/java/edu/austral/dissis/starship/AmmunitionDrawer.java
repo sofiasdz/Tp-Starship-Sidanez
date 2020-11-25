@@ -6,13 +6,13 @@ import processing.core.PImage;
 
 
     public class AmmunitionDrawer extends PGraphicsDrawer {
-        private static final float IMAGE_SIZE = 10;
+        private static final float IMAGE_SIZE = 20;
         public static final int SQUARE_SIZE = 20;
 
         private final PImage image;
 
         public AmmunitionDrawer(PImage image) {
-            image.resize(10,10);
+            image.resize(20,20);
             this.image = image;
         }
 
@@ -31,14 +31,14 @@ import processing.core.PImage;
             graphics.rotate(angle);
 
 
-            graphics.fill(255, 0, 0);
-            graphics.rect(SQUARE_SIZE / -2f, SQUARE_SIZE / -2f, SQUARE_SIZE, SQUARE_SIZE);
+            //graphics.fill(255, 0, 0);
+            //graphics.rect(SQUARE_SIZE / -2f, SQUARE_SIZE / -2f, SQUARE_SIZE, SQUARE_SIZE);
             graphics.image(image, getImageCenter(), getImageCenter());
 
 
             graphics.popMatrix();
 
-            graphics.fill(0, 255, 0);
+            //graphics.fill(0, 255, 0);
         }
 
         private float calculateRotation(Ammunition ammunition) {
