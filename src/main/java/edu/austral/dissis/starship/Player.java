@@ -2,6 +2,12 @@ package edu.austral.dissis.starship;
 
 public class Player {
     String nickname;
-    int points;
-    Control control;
+    Score score;
+
+
+    public Player(String nickname,Score score) {
+        this.nickname = nickname;
+        this.score=score;
+
+    }
 }

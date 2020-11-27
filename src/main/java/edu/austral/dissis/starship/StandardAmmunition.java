@@ -9,8 +9,9 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
 import java.awt.geom.Rectangle2D;
 
-public class StandardAmmunition extends Ammunition implements Collisionable {
+public class StandardAmmunition extends Ammunition  {
     int size;
+    private boolean isDestroyed;
     @Override
     public Vector2 getPosition() {
         return position;
@@ -60,10 +61,33 @@ public class StandardAmmunition extends Ammunition implements Collisionable {
 
     @Override
     public void collisionedWith(Collisionable collisionable) {
-        System.out.println("Collisioned with " + collisionable);
+        collisionable.collisionedWithAmmunition(this);
 
     }
+
+    @Override
+    public void collisionedWithStarship(Starship starship) {
+
+
+    }
+
+    @Override
+    public void collisionedWithAsteroid(Asteroid asteroid) {
+
+
+    }
+
+    @Override
+    public void collisionedWithAmmunition(Ammunition ammunition) {
+
+    }
+
     public float calculateRotation() {
         return this.getDirection().rotate(PConstants.PI / 2).getAngle();
+    }
+
+    @Override
+    public boolean getIsDestroyed() {
+        return isDestroyed;
     }
 }

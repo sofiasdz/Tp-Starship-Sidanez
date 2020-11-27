@@ -9,17 +9,20 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
 import java.awt.geom.Rectangle2D;
 
-public class Starship  extends StarshipInterface implements  Collisionable{
+public class Starship  extends StarshipInterface implements Collisionable,Destroyable{
     private final Vector2 position;
     private final Vector2 direction;
     Weapon weapon;
     int size;
+    int life;
+    boolean isDestroyed;
 
     public Starship(Vector2 position, Vector2 direction,int size,Weapon weapon) {
         this.position = position;
         this.direction = direction.asUnitary();
         this.size=size;
         this.weapon=weapon;
+        this.life=0;
 
     }
 
@@ -61,9 +64,27 @@ public class Starship  extends StarshipInterface implements  Collisionable{
 
     @Override
     public void collisionedWith(Collisionable collisionable) {
-        System.out.println("Collisioned with " + collisionable);
+        collisionable.collisionedWithStarship(this);
 
     }
+
+    @Override
+    public void collisionedWithStarship(Starship starship) {
+        this.life=life-1;
+    }
+
+    @Override
+    public void collisionedWithAsteroid(Asteroid asteroid) {
+        this.life=life-1;
+
+    }
+
+    @Override
+    public void collisionedWithAmmunition(Ammunition ammunition) {
+        this.life=life-1;
+
+    }
+
 
     @Override
     public Starship shoot() {
@@ -77,4 +98,8 @@ public class Starship  extends StarshipInterface implements  Collisionable{
     }
 
 
+    @Override
+    public boolean getIsDestroyed() {
+        return isDestroyed;
+    }
 }

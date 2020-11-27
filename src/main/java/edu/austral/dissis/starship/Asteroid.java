@@ -9,11 +9,12 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
 import java.awt.geom.Rectangle2D;
 
-public class Asteroid implements Movable,GameObject, Collisionable {
+public class Asteroid implements Movable,GameObject, Collisionable,Destroyable {
 
     private final Vector2 position;
     private final Vector2 direction;
      int  size;
+     private boolean isDestroyed;
 
     public Asteroid(Vector2 position, Vector2 direction,int size) {
         this.position = position;
@@ -55,12 +56,34 @@ public class Asteroid implements Movable,GameObject, Collisionable {
 
     @Override
     public void collisionedWith(Collisionable collisionable) {
-        System.out.println("Collisioned with " + collisionable);
+        collisionable.collisionedWithAsteroid(this);
+
+
+    }
+
+    @Override
+    public void collisionedWithStarship(Starship starship) {
+
+
+    }
+
+    @Override
+    public void collisionedWithAsteroid(Asteroid asteroid) {
+
+    }
+
+    @Override
+    public void collisionedWithAmmunition(Ammunition ammunition) {
 
     }
 
 
     public float calculateRotation() {
         return this.getDirection().rotate(PConstants.PI / 2).getAngle();
+    }
+
+    @Override
+    public boolean getIsDestroyed() {
+        return isDestroyed;
     }
 }
