@@ -33,7 +33,7 @@ public class GameObjectManager {
         }
 
         private void createPlayer(int number,String nickname){
-            Score score = new Score(vector(800, 800*number), vector(0, -1), nickname, 0);
+            Score score = new Score(vector(1000, 250*number), vector(0, -1), nickname, 0);
              List<Ammunition> ammo = new ArrayList<Ammunition>();
              Weapon weapon = new StandardWeapon(vector(200, 200), vector(0, -1), ammo,number);
             Starship starship = new Starship(vector(200, 200*number), vector(0, -1), 50, weapon,number);
