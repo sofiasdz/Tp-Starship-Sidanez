@@ -26,17 +26,24 @@ public class StandardAmmunition extends Ammunition  {
         this.position=position;
         this.direction=direction;
         this.size=size;
+        isDestroyed=false;
+    }
+    public StandardAmmunition( Vector2 position, Vector2 direction, int size,boolean isDestroyed) {
+        this.position=position;
+        this.direction=direction;
+        this.size=size;
+        this.isDestroyed=isDestroyed;
     }
 
     @Override
     public GameObject rotate(float angle) {
-        return new StandardAmmunition(position,direction.rotate(angle),size);
+        return new StandardAmmunition(position,direction.rotate(angle),size,isDestroyed);
     }
 
     @Override
     public GameObject moveForward(float speed) {
 
-        return new StandardAmmunition(position.add(direction.multiply(speed)), direction,size);
+        return new StandardAmmunition(position.add(direction.multiply(speed)), direction,size,isDestroyed);
     }
 
     @Override
@@ -68,17 +75,20 @@ public class StandardAmmunition extends Ammunition  {
     @Override
     public void collisionedWithStarship(Starship starship) {
 
+        //isDestroyed=true;
 
     }
 
     @Override
     public void collisionedWithAsteroid(Asteroid asteroid) {
-
-
+        System.out.println("ammun collided with asteroid");
+        isDestroyed=true;
     }
 
     @Override
     public void collisionedWithAmmunition(Ammunition ammunition) {
+
+
 
     }
 

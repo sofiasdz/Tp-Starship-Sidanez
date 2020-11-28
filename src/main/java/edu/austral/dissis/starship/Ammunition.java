@@ -7,4 +7,5 @@ public abstract class Ammunition  implements GameObject,Movable, Collisionable,D
     private String name;
     Vector2 position;
     Vector2 direction;
+    int playerNumber;
 }

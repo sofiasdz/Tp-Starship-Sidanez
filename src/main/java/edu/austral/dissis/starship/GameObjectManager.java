@@ -1,5 +1,6 @@
 package edu.austral.dissis.starship;
 
+import edu.austral.dissis.starship.base.collision.Collisionable;
 import processing.core.PConstants;
 import processing.core.PGraphics;
 
@@ -8,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 import static edu.austral.dissis.starship.base.vector.Vector2.vector;
-import static java.util.Arrays.asList;
+
 
 public class GameObjectManager {
         private List<Asteroid> asteroids;
@@ -31,13 +32,13 @@ public class GameObjectManager {
             Starship starship1 = new Starship(vector(200, 200), vector(0, -1), 50, weapon);
             starships.add(starship1);
             Asteroid asteroid = new Asteroid(vector(300, 300), vector(0, -1), 50);
+            Asteroid asteroid2 = new Asteroid(vector(600, 300), vector(0, -1), 50);
             asteroids.add(asteroid);
+            asteroids.add(asteroid2);
             controlConfiguration = new MySpaceShipControlConfiguration();
             control = new MyStarshipControl(starship1, controlConfiguration);
             player = new Player("Khali", score);
-            collisionChecker= new CollisionChecker(asList(
-                    starship1,asteroid
-            ));
+            collisionChecker= new CollisionChecker();
         }
 
 
@@ -48,9 +49,12 @@ public class GameObjectManager {
                 ammo=starships.get(i).weapon.ammo;
 
             }
-            collisionChecker.checkCollisions();
+            manageCollisions();
             updateAsteroid();
             updateAmmo();
+            manageAmmo();
+            manageAsteroids();
+
         }
 
 
@@ -69,23 +73,69 @@ public class GameObjectManager {
             ammunition=(Ammunition)ammunition.moveForward(10);
             ammo.set(i,ammunition);
 
+
         }
 
 
 
     }
+
+    private void manageAmmo() {
+        for (int i = 0; i < ammo.size(); i++) {
+            Ammunition ammunition = ammo.get(i);
+            if (ammunition.getIsDestroyed()) {
+                ammo.remove(ammunition);
+                i = i - 1;
+
+
+            }
+        }
+    }
+
+        private void manageAsteroids(){
+            int points=0;
+            for (int i = 0; i <asteroids.size() ; i++) {
+               Asteroid asteroid=asteroids.get(i);
+                if(asteroid.getIsDestroyed()){
+                  asteroids.remove(asteroid);
+                  points=points+1;
+                    System.out.println("DEAD ASTEROID");
+                    i=i-1;
+                }
+            }
+            score.setPoints(score.getPoints()+points);
+
+
+    }
+
+
 
     public void  drawGameObjects(DrawerManager drawerManager, PGraphics graphics){
-            drawerManager.Draw(graphics,starships,asteroids,ammo,score);
+            drawerManager.draw(graphics,starships,asteroids,ammo,score);
 
     }
 
-   /* public void getPoints(){
-            int points=0;
-        for (int i = 0; i < asteroids.size() ; i++) {
-
+    public void manageCollisions(){
+            List<Collisionable>collisionables=new ArrayList<>();
+        for (int i = 0; i <starships.size() ; i++) {
+            collisionables.add(starships.get(i));
 
         }
-    }*/
+        for (int i = 0; i <asteroids.size() ; i++) {
+            collisionables.add(asteroids.get(i));
+
+        }
+        for (int i = 0; i <ammo.size() ; i++) {
+            collisionables.add(ammo.get(i));
+
+        }
+            collisionChecker.setCollisionables(collisionables);
+        collisionChecker.checkCollisions();
+    }
+
+
+
+
+
 
 }

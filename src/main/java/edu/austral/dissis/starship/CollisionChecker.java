@@ -2,6 +2,8 @@ package edu.austral.dissis.starship;
 
 import edu.austral.dissis.starship.base.collision.CollisionEngine;
 import edu.austral.dissis.starship.base.collision.Collisionable;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -16,6 +18,12 @@ public class CollisionChecker {
         engine=new CollisionEngine();
     }
 
+    public CollisionChecker() {
+        this.collisionables = new ArrayList<>();
+        engine=new CollisionEngine();
+    }
+
+
     public List<Collisionable> getCollisionables() {
         return collisionables;
     }
@@ -26,5 +34,12 @@ public class CollisionChecker {
 
     public void checkCollisions() {
         engine.checkCollisions(collisionables);
+    }
+    public void addCollisionables(Collisionable collisionable){
+        collisionables.add(collisionable);
+    }
+
+    public void removeCollisionables(Collisionable collisionable){
+        collisionables.remove(collisionable);
     }
 }

@@ -31,6 +31,7 @@ public class CustomGameFramework implements GameFramework {
     gameObjectManager.handleUpdates(keySet);
     gameObjectManager.drawGameObjects(drawerManager,graphics);
 
+
     }
 
 

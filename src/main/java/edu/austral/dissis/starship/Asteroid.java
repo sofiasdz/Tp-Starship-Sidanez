@@ -16,23 +16,31 @@ public class Asteroid implements Movable,GameObject, Collisionable,Destroyable {
      int  size;
      private boolean isDestroyed;
 
+    public Asteroid(Vector2 position, Vector2 direction,int size,boolean isDestroyed) {
+        this.position = position;
+        this.direction = direction.asUnitary();
+        this.size=size;
+        this.isDestroyed=isDestroyed;
+    }
+
     public Asteroid(Vector2 position, Vector2 direction,int size) {
         this.position = position;
         this.direction = direction.asUnitary();
         this.size=size;
+        this.isDestroyed=false;
     }
 
     public Asteroid rotate(float angle) {
 
-        return  new Asteroid(position, direction.rotate(angle),size);
+        return  new Asteroid(position, direction.rotate(angle),size,isDestroyed);
     }
 
     public Asteroid moveForward(float speed) {
-        return  new Asteroid(position.add(direction.multiply(speed)), direction,size);
+        return  new Asteroid(position.add(direction.multiply(speed)), direction,size,isDestroyed);
     }
 
     public Asteroid moveBackwards(float speed) {
-        return  new Asteroid(position.subtract(direction.multiply(speed)), direction,size);
+        return  new Asteroid(position.subtract(direction.multiply(speed)), direction,size,isDestroyed);
     }
 
     public Vector2 getPosition() { return position; }
@@ -63,17 +71,25 @@ public class Asteroid implements Movable,GameObject, Collisionable,Destroyable {
 
     @Override
     public void collisionedWithStarship(Starship starship) {
+        System.out.println("Asteroid collided with starship");
+        isDestroyed=true;
+
+
 
 
     }
 
     @Override
     public void collisionedWithAsteroid(Asteroid asteroid) {
+        //isDestroyed=true;
+
 
     }
 
     @Override
     public void collisionedWithAmmunition(Ammunition ammunition) {
+        System.out.println("Asteroid collided with ammunition");
+        isDestroyed=true;
 
     }
 

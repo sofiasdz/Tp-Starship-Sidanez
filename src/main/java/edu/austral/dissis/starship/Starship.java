@@ -26,16 +26,28 @@ public class Starship  extends StarshipInterface implements Collisionable,Destro
 
     }
 
+    public Starship(Vector2 position, Vector2 direction,int size,Weapon weapon,int life,boolean isDestroyed) {
+        this.position = position;
+        this.direction = direction.asUnitary();
+        this.size=size;
+        this.weapon=weapon;
+        this.life=life;
+        this.isDestroyed=isDestroyed;
+
+
+    }
+
+
     public Starship rotate(float angle) {
-        return new Starship(position, direction.rotate(angle),size,(Weapon)weapon.rotate(angle));
+        return new Starship(position, direction.rotate(angle),size,(Weapon)weapon.rotate(angle),life,isDestroyed);
     }
 
     public Starship moveForward(float speed) {
-        return new Starship(position.add(direction.multiply(speed)), direction, size, (Weapon)weapon.moveForward(speed));
+        return new Starship(position.add(direction.multiply(speed)), direction, size, (Weapon)weapon.moveForward(speed),life,isDestroyed);
     }
 
     public Starship moveBackwards(float speed) {
-        return new Starship(position.subtract(direction.multiply(speed)), direction, size,(Weapon) weapon.moveBackwards(speed));
+        return new Starship(position.subtract(direction.multiply(speed)), direction, size,(Weapon) weapon.moveBackwards(speed),life,isDestroyed);
 
     }
     public Vector2 getPosition() { return position; }
@@ -75,13 +87,15 @@ public class Starship  extends StarshipInterface implements Collisionable,Destro
 
     @Override
     public void collisionedWithAsteroid(Asteroid asteroid) {
+        System.out.println("startship collided with asteroid");
         this.life=life-1;
 
     }
 
     @Override
     public void collisionedWithAmmunition(Ammunition ammunition) {
-        this.life=life-1;
+        //System.out.println("starship collided with ammunition");
+        //this.life=life-1;
 
     }
 
