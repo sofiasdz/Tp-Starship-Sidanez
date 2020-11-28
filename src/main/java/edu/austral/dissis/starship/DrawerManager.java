@@ -18,7 +18,7 @@ public class DrawerManager {
         scoreDrawer = new ScoreDrawer(imageLoader.load("bullet.png"));
     }
 
-    public void draw(PGraphics graphics, List<Starship> starships, List<Asteroid> asteroids,List<Ammunition> ammo,Score score){
+    public void draw(PGraphics graphics, List<Starship> starships, List<Asteroid> asteroids,List<Ammunition> ammo,List<Score>scores){
         DrawerComponent drawerComponent=new DrawerComponent(graphics,starshipDrawer);
         DrawerComponent drawerComponent1= new DrawerComponent(graphics,asteroidDrawer);
         DrawerComponent drawerComponent2=new DrawerComponent(graphics,ammunitionDrawer);
@@ -32,7 +32,11 @@ public class DrawerManager {
 
 
         }
-        drawerComponent3.draw(score);
+        for (int i = 0; i <scores.size() ; i++) {
+            drawerComponent3.draw(scores.get(i));
+
+
+        }
         for (int i = 0; i <ammo.size() ; i++) {
             drawerComponent2.draw(ammo.get(i));
 

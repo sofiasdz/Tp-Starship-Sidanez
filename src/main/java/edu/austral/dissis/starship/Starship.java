@@ -9,28 +9,32 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
 import java.awt.geom.Rectangle2D;
 
-public class Starship  extends StarshipInterface implements Collisionable,Destroyable{
+public class Starship  extends StarshipInterface implements Collisionable,Destroyable,Identifiable{
     private final Vector2 position;
     private final Vector2 direction;
     Weapon weapon;
     int size;
     int life;
     boolean isDestroyed;
+    int playerNumber;
+    int destroyedBy;
 
-    public Starship(Vector2 position, Vector2 direction,int size,Weapon weapon) {
+    public Starship(Vector2 position, Vector2 direction,int size,Weapon weapon,int playerNumber) {
         this.position = position;
         this.direction = direction.asUnitary();
         this.size=size;
         this.weapon=weapon;
         this.life=0;
+        this.playerNumber=playerNumber;
 
     }
 
-    public Starship(Vector2 position, Vector2 direction,int size,Weapon weapon,int life,boolean isDestroyed) {
+    public Starship(Vector2 position, Vector2 direction,int size,Weapon weapon, int playerNumber,int life,boolean isDestroyed) {
         this.position = position;
         this.direction = direction.asUnitary();
         this.size=size;
         this.weapon=weapon;
+        this.playerNumber=playerNumber;
         this.life=life;
         this.isDestroyed=isDestroyed;
 
@@ -39,15 +43,15 @@ public class Starship  extends StarshipInterface implements Collisionable,Destro
 
 
     public Starship rotate(float angle) {
-        return new Starship(position, direction.rotate(angle),size,(Weapon)weapon.rotate(angle),life,isDestroyed);
+        return new Starship(position, direction.rotate(angle),size,(Weapon)weapon.rotate(angle),playerNumber,life,isDestroyed);
     }
 
     public Starship moveForward(float speed) {
-        return new Starship(position.add(direction.multiply(speed)), direction, size, (Weapon)weapon.moveForward(speed),life,isDestroyed);
+        return new Starship(position.add(direction.multiply(speed)), direction, size, (Weapon)weapon.moveForward(speed),playerNumber,life,isDestroyed);
     }
 
     public Starship moveBackwards(float speed) {
-        return new Starship(position.subtract(direction.multiply(speed)), direction, size,(Weapon) weapon.moveBackwards(speed),life,isDestroyed);
+        return new Starship(position.subtract(direction.multiply(speed)), direction, size,(Weapon) weapon.moveBackwards(speed),playerNumber,life,isDestroyed);
 
     }
     public Vector2 getPosition() { return position; }
@@ -94,8 +98,10 @@ public class Starship  extends StarshipInterface implements Collisionable,Destro
 
     @Override
     public void collisionedWithAmmunition(Ammunition ammunition) {
-        //System.out.println("starship collided with ammunition");
-        //this.life=life-1;
+        if(ammunition.getPlayerNumber()!=playerNumber){
+            this.life=life-1;
+
+        }
 
     }
 
@@ -103,11 +109,7 @@ public class Starship  extends StarshipInterface implements Collisionable,Destro
     @Override
     public Starship shoot() {
          weapon.shoot();
-        return new Starship(position,direction,size,weapon);
-
-
-
-
+        return new Starship(position,direction,size,weapon,playerNumber);
 
     }
 
@@ -116,4 +118,15 @@ public class Starship  extends StarshipInterface implements Collisionable,Destro
     public boolean getIsDestroyed() {
         return isDestroyed;
     }
+
+    @Override
+    public int getPlayerNumber() {
+        return playerNumber;
+    }
+    @Override
+    public int destroyedBy(){
+        return destroyedBy;
+    }
 }
+
+

@@ -22,28 +22,30 @@ public class StandardAmmunition extends Ammunition  {
         return direction;
     }
 
-    public StandardAmmunition( Vector2 position, Vector2 direction, int size) {
+    public StandardAmmunition( Vector2 position, Vector2 direction, int size,int playerNumber) {
         this.position=position;
         this.direction=direction;
         this.size=size;
         isDestroyed=false;
+        this.playerNumber=playerNumber;
     }
-    public StandardAmmunition( Vector2 position, Vector2 direction, int size,boolean isDestroyed) {
+    public StandardAmmunition( Vector2 position, Vector2 direction, int size,int playerNumber,boolean isDestroyed) {
         this.position=position;
         this.direction=direction;
         this.size=size;
+        this.playerNumber=playerNumber;
         this.isDestroyed=isDestroyed;
     }
 
     @Override
     public GameObject rotate(float angle) {
-        return new StandardAmmunition(position,direction.rotate(angle),size,isDestroyed);
+        return new StandardAmmunition(position,direction.rotate(angle),size,playerNumber,isDestroyed);
     }
 
     @Override
     public GameObject moveForward(float speed) {
 
-        return new StandardAmmunition(position.add(direction.multiply(speed)), direction,size,isDestroyed);
+        return new StandardAmmunition(position.add(direction.multiply(speed)), direction,size,playerNumber,isDestroyed);
     }
 
     @Override
@@ -74,8 +76,7 @@ public class StandardAmmunition extends Ammunition  {
 
     @Override
     public void collisionedWithStarship(Starship starship) {
-
-        //isDestroyed=true;
+        if(playerNumber!=starship.getPlayerNumber())isDestroyed=true;
 
     }
 
@@ -99,5 +100,15 @@ public class StandardAmmunition extends Ammunition  {
     @Override
     public boolean getIsDestroyed() {
         return isDestroyed;
+    }
+
+    @Override
+    public int destroyedBy() {
+        return 0;
+    }
+
+    @Override
+    public int getPlayerNumber() {
+        return playerNumber;
     }
 }
