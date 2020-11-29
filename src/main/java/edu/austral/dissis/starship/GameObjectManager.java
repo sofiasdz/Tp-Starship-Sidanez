@@ -35,6 +35,7 @@ public class GameObjectManager {
 
         private void createPlayer(int number,String nickname){
             Score score = new Score(vector(1000, 250*number), vector(0, -1), nickname, 0);
+            Life life=new Life(vector(900, 200*number), vector(0, -1),3);
              List<Ammunition> ammo = new ArrayList<Ammunition>();
              Weapon weapon = new StandardWeapon(vector(200, 200*number), vector(0, -1), ammo,number);
             Starship starship = new Starship(vector(200, 200*number), vector(0, -1), 50, weapon,number);
@@ -42,13 +43,12 @@ public class GameObjectManager {
             ControlConfiguration controlConfiguration;
             if(number==2){
                  controlConfiguration = new MySpaceshipControlP2();
-
             }
             else {
                 controlConfiguration = new MySpaceShipControlConfiguration();
             }
              Control control = new MyStarshipControl(starship, controlConfiguration);
-             Player player = new Player("Khali", score);
+             Player player = new Player(nickname, score,life);
              controls.add(control);
              players.add(player);
 
@@ -190,7 +190,7 @@ public class GameObjectManager {
 
     public void  drawGameObjects(DrawerManager drawerManager, PGraphics graphics){
             getAmmo();
-            drawerManager.draw(graphics,starships,asteroids,ammo,getPlayerScores());
+            drawerManager.draw(graphics,starships,asteroids,ammo,getPlayersScores(),getPlayersLives());
 
     }
 
@@ -225,13 +225,22 @@ public class GameObjectManager {
         }
     }
 
-    public List<Score> getPlayerScores(){
+    public List<Score> getPlayersScores(){
             List<Score> scores=new ArrayList<>();
         for (int i = 0; i <players.size(); i++) {
-            scores.add(players.get(i).score);
+            scores.add(players.get(i).getScore());
 
         }
         return scores;
+    }
+
+    public List<Life> getPlayersLives(){
+        List<Life> lives=new ArrayList<>();
+        for (int i = 0; i <players.size(); i++) {
+            lives.add(players.get(i).getLife());
+
+        }
+        return lives;
     }
 
 
