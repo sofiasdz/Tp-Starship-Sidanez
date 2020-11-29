@@ -17,11 +17,12 @@ public class Asteroid implements Movable,GameObject, Collisionable,Destroyable {
      private boolean isDestroyed;
      int destroyedBy;
 
-    public Asteroid(Vector2 position, Vector2 direction,int size,boolean isDestroyed) {
+    public Asteroid(Vector2 position, Vector2 direction,int size,boolean isDestroyed,int destroyedBy) {
         this.position = position;
         this.direction = direction.asUnitary();
         this.size=size;
         this.isDestroyed=isDestroyed;
+        this.destroyedBy=destroyedBy;
     }
 
     public Asteroid(Vector2 position, Vector2 direction,int size) {
@@ -29,19 +30,20 @@ public class Asteroid implements Movable,GameObject, Collisionable,Destroyable {
         this.direction = direction.asUnitary();
         this.size=size;
         this.isDestroyed=false;
+        this.destroyedBy=0;
     }
 
     public Asteroid rotate(float angle) {
 
-        return  new Asteroid(position, direction.rotate(angle),size,isDestroyed);
+        return  new Asteroid(position, direction.rotate(angle),size,isDestroyed,destroyedBy);
     }
 
     public Asteroid moveForward(float speed) {
-        return  new Asteroid(position.add(direction.multiply(speed)), direction,size,isDestroyed);
+        return  new Asteroid(position.add(direction.multiply(speed)), direction,size,isDestroyed,destroyedBy);
     }
 
     public Asteroid moveBackwards(float speed) {
-        return  new Asteroid(position.subtract(direction.multiply(speed)), direction,size,isDestroyed);
+        return  new Asteroid(position.subtract(direction.multiply(speed)), direction,size,isDestroyed,destroyedBy);
     }
 
     public Vector2 getPosition() { return position; }
@@ -73,8 +75,9 @@ public class Asteroid implements Movable,GameObject, Collisionable,Destroyable {
     @Override
     public void collisionedWithStarship(Starship starship) {
         System.out.println("Asteroid collided with starship");
-        isDestroyed=true;
         destroyedBy=starship.getPlayerNumber();
+        isDestroyed=true;
+
 
 
 
@@ -91,8 +94,9 @@ public class Asteroid implements Movable,GameObject, Collisionable,Destroyable {
     @Override
     public void collisionedWithAmmunition(Ammunition ammunition) {
         System.out.println("Asteroid collided with ammunition");
-        isDestroyed=true;
         destroyedBy=ammunition.getPlayerNumber();
+        isDestroyed=true;
+
 
     }
 

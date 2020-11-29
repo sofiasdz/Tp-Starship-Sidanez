@@ -1,33 +1,32 @@
 package edu.austral.dissis.starship;
-
-import processing.core.PConstants;
+import java.awt.event.KeyEvent;
 
 public class MySpaceshipControlP2 implements ControlConfiguration
 {
 
     @Override
     public Object getMoveFowardKey() {
-        return PConstants.UP;
+        return KeyEvent.VK_W ;
     }
 
     @Override
     public Object getRotateLeftKey() {
-        return PConstants.LEFT;
+        return KeyEvent.VK_A ;
 
     }
     @Override
     public Object getRotateRightKey(){
-        return  PConstants.RIGHT;
+        return  KeyEvent.VK_D;
     }
 
     @Override
     public Object getMoveBackwardsKey() {
-        return PConstants.DOWN;
+        return KeyEvent.VK_S;
 
     }
 
     @Override
     public Object getShootkey() {
-        return PConstants.SHIFT;
+        return KeyEvent.VK_Q;
     }
 }

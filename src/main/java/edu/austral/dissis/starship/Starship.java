@@ -81,18 +81,29 @@ public class Starship  extends StarshipInterface implements Collisionable,Destro
     @Override
     public void collisionedWith(Collisionable collisionable) {
         collisionable.collisionedWithStarship(this);
+        if(life<0); isDestroyed=true;
 
     }
 
     @Override
     public void collisionedWithStarship(Starship starship) {
         this.life=life-1;
+        if(life<0){
+            destroyedBy=starship.getPlayerNumber();
+            isDestroyed=true;
+        }
     }
 
     @Override
     public void collisionedWithAsteroid(Asteroid asteroid) {
         System.out.println("startship collided with asteroid");
         this.life=life-1;
+        if(life<0){
+            destroyedBy=-1;
+            isDestroyed=true;
+        }
+
+
 
     }
 
@@ -100,6 +111,10 @@ public class Starship  extends StarshipInterface implements Collisionable,Destro
     public void collisionedWithAmmunition(Ammunition ammunition) {
         if(ammunition.getPlayerNumber()!=playerNumber){
             this.life=life-1;
+            if(life<0){
+                destroyedBy=ammunition.getPlayerNumber();
+                isDestroyed=true;
+            }
 
         }
 

@@ -26,7 +26,7 @@ public class CustomGameFramework implements GameFramework {
         int numberOfPlayers = Integer.parseInt(number);
         List<String> playerNames=new ArrayList<>();
         for (int i = 0; i <numberOfPlayers ; i++) {
-            String name= JOptionPane.showInputDialog("Please input player number "+i+1+" nickname");
+            String name= JOptionPane.showInputDialog("Please input player number "+(i+1)+" nickname");
             playerNames.add(name);
 
         }

@@ -36,10 +36,17 @@ public class GameObjectManager {
         private void createPlayer(int number,String nickname){
             Score score = new Score(vector(1000, 250*number), vector(0, -1), nickname, 0);
              List<Ammunition> ammo = new ArrayList<Ammunition>();
-             Weapon weapon = new StandardWeapon(vector(200, 200), vector(0, -1), ammo,number);
+             Weapon weapon = new StandardWeapon(vector(200, 200*number), vector(0, -1), ammo,number);
             Starship starship = new Starship(vector(200, 200*number), vector(0, -1), 50, weapon,number);
             starships.add(starship);
-            ControlConfiguration controlConfiguration = new MySpaceShipControlConfiguration();
+            ControlConfiguration controlConfiguration;
+            if(number==2){
+                 controlConfiguration = new MySpaceshipControlP2();
+
+            }
+            else {
+                controlConfiguration = new MySpaceShipControlConfiguration();
+            }
              Control control = new MyStarshipControl(starship, controlConfiguration);
              Player player = new Player("Khali", score);
              controls.add(control);
@@ -123,10 +130,11 @@ public class GameObjectManager {
         private void manageAsteroids(){
             for (int i = 0; i <asteroids.size() ; i++) {
                Asteroid asteroid=asteroids.get(i);
-                if(asteroid.getIsDestroyed()){
+                if(asteroid.getIsDestroyed()&& asteroid.destroyedBy!=-1){
                     int destroyedBy= asteroid.destroyedBy;
                     asteroids.remove(asteroid);
-                    Score score=players.get(destroyedBy).score;
+                    Score score=players.get(destroyedBy-1).score;
+                    System.out.println(destroyedBy);
                     score.setPoints(score.getPoints()+1);
                     System.out.println("DEAD ASTEROID");
                     i=i-1;
