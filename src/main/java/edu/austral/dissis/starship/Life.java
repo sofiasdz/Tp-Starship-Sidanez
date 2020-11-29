@@ -17,6 +17,11 @@ public class Life implements GameObject {
         return direction;
     }
 
+    @Override
+    public int getSize() {
+        return 0;
+    }
+
     public int getLives() {
         return lives;
     }

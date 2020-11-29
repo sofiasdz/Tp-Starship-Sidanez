@@ -6,7 +6,7 @@ import processing.core.PImage;
 
 public class LifeDrawer extends PGraphicsDrawer {
     private static final float IMAGE_SIZE = 200;
-    public static final int SQUARE_SIZE = 50;
+    //public static final int SQUARE_SIZE = 50;
 
     private final PImage image;
 

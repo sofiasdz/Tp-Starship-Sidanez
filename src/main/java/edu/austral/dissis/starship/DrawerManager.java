@@ -11,6 +11,8 @@ public class DrawerManager {
     private AmmunitionDrawer ammunitionDrawer;
     private ScoreDrawer scoreDrawer;
     private LifeDrawer lifeDrawer;
+    private  BigAsteroidDrawer bigAsteroidDrawer;
+    private SmallAsteroidDrawer smallAsteroidDrawer;
 
     public void setUp( ImageLoader imageLoader){
         starshipDrawer = new StarshipDrawer(imageLoader.load("spaceship.png"));
@@ -18,6 +20,8 @@ public class DrawerManager {
         ammunitionDrawer = new AmmunitionDrawer(imageLoader.load("bullet.png"));
         scoreDrawer = new ScoreDrawer(imageLoader.load("bullet.png"));
         lifeDrawer=new LifeDrawer(imageLoader.load("bullet.png"));
+        bigAsteroidDrawer=new BigAsteroidDrawer(imageLoader.load("asteroid.png"));
+        smallAsteroidDrawer=new SmallAsteroidDrawer(imageLoader.load("asteroid.png"));
     }
 
     public void draw(PGraphics graphics, List<Starship> starships, List<Asteroid> asteroids,List<Ammunition> ammo,List<Score>scores,List<Life> lives){
@@ -26,12 +30,23 @@ public class DrawerManager {
         DrawerComponent drawerComponent2=new DrawerComponent(graphics,ammunitionDrawer);
         DrawerComponent drawerComponent3= new DrawerComponent(graphics,scoreDrawer);
         DrawerComponent drawerComponent4=new DrawerComponent(graphics,lifeDrawer);
+        DrawerComponent drawerComponent5=new DrawerComponent(graphics,bigAsteroidDrawer);
+        DrawerComponent drawerComponent6=new DrawerComponent(graphics,smallAsteroidDrawer);
         for (int i = 0; i <starships.size() ; i++) {
             drawerComponent.draw(starships.get(i));
 
         }
         for (int i = 0; i <asteroids.size() ; i++) {
-            drawerComponent1.draw(asteroids.get(i));
+            if(asteroids.get(i).size==100){
+                drawerComponent5.draw(asteroids.get(i));
+            }
+            if(asteroids.get(i).size==10){
+                drawerComponent6.draw(asteroids.get(i));
+            }
+
+            if (asteroids.get(i).size==50){
+                drawerComponent1.draw(asteroids.get(i));
+            }
 
 
         }

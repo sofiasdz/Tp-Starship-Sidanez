@@ -51,6 +51,11 @@ public class Asteroid implements Movable,GameObject, Collisionable,Destroyable {
     public Vector2 getDirection() { return direction; }
 
     @Override
+    public int getSize() {
+        return  size;
+    }
+
+    @Override
     public Shape getShape() {
         final Rectangle2D baseSquare = new Rectangle2D.Float(size / -2, size / -2, size, size);
         final Path2D.Float path = new Path2D.Float();

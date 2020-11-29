@@ -22,6 +22,11 @@ public class StandardAmmunition extends Ammunition  {
         return direction;
     }
 
+    @Override
+    public int getSize() {
+        return size;
+    }
+
     public StandardAmmunition( Vector2 position, Vector2 direction, int size,int playerNumber) {
         this.position=position;
         this.direction=direction;

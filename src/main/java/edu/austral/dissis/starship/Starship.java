@@ -58,6 +58,11 @@ public class Starship  extends StarshipInterface implements Collisionable,Destro
 
     public Vector2 getDirection() { return direction; }
 
+    @Override
+    public int getSize() {
+        return size;
+    }
+
 
     public float calculateRotation() {
         return this.getDirection().rotate(PConstants.PI / 2).getAngle();

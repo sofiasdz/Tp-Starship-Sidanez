@@ -18,6 +18,7 @@ public class GameObjectManager {
         private List<Control> controls;
         private List<Ammunition> ammo;
         private CollisionChecker collisionChecker;
+        private Player winner;
 
 
 
@@ -55,15 +56,19 @@ public class GameObjectManager {
         }
 
         private void spawnAsteroids(){
-            Asteroid asteroid = new Asteroid(vector(300, 300), vector(0, -1), 50);
+            Asteroid asteroid = new Asteroid(vector(300, 300), vector(0, -1), 100);
             Asteroid asteroid2 = new Asteroid(vector(600, 300), vector(0, -1), 50);
-            Asteroid asteroid3 = new Asteroid(vector(900, 300), vector(0, -1), 50);
+            Asteroid asteroid3 = new Asteroid(vector(900, 300), vector(0, -1), 100);
             Asteroid asteroid4 = new Asteroid(vector(600, 600), vector(0, -1), 50);
+            Asteroid asteroid5 = new Asteroid(vector(1000, 100), vector(0, -1), 10);
+            Asteroid asteroid6 = new Asteroid(vector(100, 100), vector(0, -1), 10);
 
             asteroids.add(asteroid);
             asteroids.add(asteroid2);
             asteroids.add(asteroid3);
             asteroids.add(asteroid4);
+            asteroids.add(asteroid5);
+            asteroids.add(asteroid6);
 
         }
 
@@ -157,14 +162,21 @@ public class GameObjectManager {
                     System.out.println(destroyedBy);
                     score.setPoints(score.getPoints()+ 5);
                 }
-                List<Ammunition> ammo = new ArrayList<Ammunition>();
-                Weapon weapon = new StandardWeapon(vector(200, 200*starship.playerNumber), vector(0, -1), ammo,starship.getPlayerNumber());
-                Starship starship2=new Starship(vector(200, 200*starship.playerNumber), vector(0, -1),50,weapon,starship.playerNumber);
-                starships.set(i,starship2);
+                Life life= players.get(i).getLife();
+                if( life.getLives()-1<0){
+                    starships.remove(starships);
 
-                controls.set(i,new MyStarshipControl(starship2,getControlConfiguration(starship.playerNumber)));
-                System.out.println(starship2.getIsDestroyed());
-                System.out.println("DEAD SPACESHIP");
+                }else {
+                    players.get(i).getLife().setLives(life.getLives() - 1);
+                    List<Ammunition> ammo = new ArrayList<Ammunition>();
+                    Weapon weapon = new StandardWeapon(vector(200, 200 * starship.playerNumber), vector(0, -1), ammo, starship.getPlayerNumber());
+                    Starship starship2 = new Starship(vector(200, 200 * starship.playerNumber), vector(0, -1), 50, weapon, starship.playerNumber);
+                    starships.set(i, starship2);
+
+                    controls.set(i, new MyStarshipControl(starship2, getControlConfiguration(starship.playerNumber)));
+                    System.out.println(starship2.getIsDestroyed());
+                    System.out.println("DEAD SPACESHIP");
+                }
 
             }
         }
