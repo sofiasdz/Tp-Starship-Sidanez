@@ -9,4 +9,18 @@ public  abstract class Control {
     private ControlConfiguration controlConfiguration;
 
    public  abstract Movable updateMovable(Set<Integer> keySet);
+
+    public void setMovable(Movable movable) {
+        this.movable = movable;
+    }
+
+    public Movable getMovable() {
+        return movable;
+    }
+
+    public ControlConfiguration getControlConfiguration() {
+        return controlConfiguration;
+    }
 }
+
+

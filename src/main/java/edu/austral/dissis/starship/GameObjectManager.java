@@ -81,6 +81,7 @@ public class GameObjectManager {
             updateAmmo();
             manageAmmo();
             manageAsteroids();
+            manageStarships();
 
         }
 
@@ -143,6 +144,46 @@ public class GameObjectManager {
 
 
 
+    }
+    private void manageStarships(){
+        for (int i = 0; i <starships.size() ; i++) {
+            Starship starship=starships.get(i);
+            System.out.println(starship.getIsDestroyed());
+            if(starship.getIsDestroyed()){
+                if (starship.destroyedBy!=-1) {
+                    int destroyedBy = starship.destroyedBy;
+                    System.out.println(destroyedBy);
+                    Score score = players.get(destroyedBy - 1).score;
+                    System.out.println(destroyedBy);
+                    score.setPoints(score.getPoints()+ 5);
+                }
+                List<Ammunition> ammo = new ArrayList<Ammunition>();
+                Weapon weapon = new StandardWeapon(vector(200, 200*starship.playerNumber), vector(0, -1), ammo,starship.getPlayerNumber());
+                Starship starship2=new Starship(vector(200, 200*starship.playerNumber), vector(0, -1),50,weapon,starship.playerNumber);
+                starships.set(i,starship2);
+
+                controls.set(i,new MyStarshipControl(starship2,getControlConfiguration(starship.playerNumber)));
+                System.out.println(starship2.getIsDestroyed());
+                System.out.println("DEAD SPACESHIP");
+
+            }
+        }
+
+
+
+    }
+
+    private ControlConfiguration getControlConfiguration(int playerNumber){
+        ControlConfiguration controlConfiguration;
+        if(playerNumber==2){
+            controlConfiguration = new MySpaceshipControlP2();
+
+        }
+        else {
+            controlConfiguration = new MySpaceShipControlConfiguration();
+        }
+
+        return controlConfiguration;
     }
 
 

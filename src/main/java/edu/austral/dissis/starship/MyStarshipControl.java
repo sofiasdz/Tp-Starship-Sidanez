@@ -48,4 +48,9 @@ public class MyStarshipControl extends Control {
         this.movable = starshipInterface;
         this.controlConfiguration = controlConfiguration;
     }
+
+
+    public void setStarship(StarshipInterface starship){
+        this.movable=starship;
+    }
 }
