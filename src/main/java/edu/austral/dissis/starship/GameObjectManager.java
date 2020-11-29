@@ -21,13 +21,14 @@ public class GameObjectManager {
 
 
 
-        public void setUp(){
+        public void setUp(int numberOfPlayers,List<String> playersNames){
             asteroids=new ArrayList<>();
             starships=new ArrayList<>();
             players=new ArrayList<>();
             controls=new ArrayList<>();
-           createPlayer(1,"khali");
-           createPlayer(2,"sofi");
+            for (int i = 0; i <numberOfPlayers; i++) {
+                createPlayer(i+1,playersNames.get(i));
+            }
             collisionChecker= new CollisionChecker();
             spawnAsteroids();
         }
