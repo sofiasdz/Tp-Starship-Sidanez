@@ -13,6 +13,7 @@ public class DrawerManager {
     private LifeDrawer lifeDrawer;
     private  BigAsteroidDrawer bigAsteroidDrawer;
     private SmallAsteroidDrawer smallAsteroidDrawer;
+    private GameOverDrawer gameOverDrawer;
 
     public void setUp( ImageLoader imageLoader){
         starshipDrawer = new StarshipDrawer(imageLoader.load("spaceship.png"));
@@ -22,9 +23,10 @@ public class DrawerManager {
         lifeDrawer=new LifeDrawer(imageLoader.load("bullet.png"));
         bigAsteroidDrawer=new BigAsteroidDrawer(imageLoader.load("asteroid.png"));
         smallAsteroidDrawer=new SmallAsteroidDrawer(imageLoader.load("asteroid.png"));
+        gameOverDrawer=new GameOverDrawer(imageLoader.load("asteroid.png"));
     }
 
-    public void draw(PGraphics graphics, List<Starship> starships, List<Asteroid> asteroids,List<Ammunition> ammo,List<Score>scores,List<Life> lives){
+    public void draw(PGraphics graphics, List<Starship> starships, List<Asteroid> asteroids,List<Ammunition> ammo,List<Score>scores,List<Life> lives,GameOverScreen gameOverScreen){
         DrawerComponent drawerComponent=new DrawerComponent(graphics,starshipDrawer);
         DrawerComponent drawerComponent1= new DrawerComponent(graphics,asteroidDrawer);
         DrawerComponent drawerComponent2=new DrawerComponent(graphics,ammunitionDrawer);
@@ -32,6 +34,7 @@ public class DrawerManager {
         DrawerComponent drawerComponent4=new DrawerComponent(graphics,lifeDrawer);
         DrawerComponent drawerComponent5=new DrawerComponent(graphics,bigAsteroidDrawer);
         DrawerComponent drawerComponent6=new DrawerComponent(graphics,smallAsteroidDrawer);
+        DrawerComponent drawerComponent7=new DrawerComponent(graphics,gameOverDrawer);
         for (int i = 0; i <starships.size() ; i++) {
             drawerComponent.draw(starships.get(i));
 
@@ -61,6 +64,10 @@ public class DrawerManager {
         }
         for (int i = 0; i <lives.size() ; i++) {
             drawerComponent4.draw(lives.get(i));
+
+        }
+        if (gameOverScreen!=null){
+            drawerComponent7.draw(gameOverScreen);
 
         }
     }

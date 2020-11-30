@@ -4,13 +4,13 @@ import processing.core.PFont;
 import processing.core.PGraphics;
 import processing.core.PImage;
 
-public class LifeDrawer extends PGraphicsDrawer {
+public class GameOverDrawer extends PGraphicsDrawer {
     private static final float IMAGE_SIZE = 200;
     //public static final int SQUARE_SIZE = 50;
 
     private final PImage image;
 
-    public LifeDrawer(PImage image) {
+    public GameOverDrawer(PImage image) {
         this.image = image;
     }
 
@@ -21,14 +21,13 @@ public class LifeDrawer extends PGraphicsDrawer {
 
 
     public void draw(PGraphics graphics, GameObject gameObject) {
-        Life life= (Life)gameObject;
+        GameOverScreen gameOverScreen= (GameOverScreen) gameObject;
         PFont f;
         PFont.loadFonts();
         f= graphics.parent.createFont("Arial",16,true);
-        graphics.textFont(f,26);
+        graphics.textFont(f,46);
         graphics.fill(225);
-        System.out.println("here");
-        System.out.println(life.getLives());
-        graphics.text("Lives: "+life.getLives(),(int)gameObject.getPosition().getX(),(int)gameObject.getPosition().getY());
+        graphics.text("GAME OVER",(int)gameObject.getPosition().getX()+200,(int)gameObject.getPosition().getY());
+        graphics.text(" The WINNER  is "+gameOverScreen.getWinnerNickname()+", with the SCORE of "+gameOverScreen.getPoints() ,(int)gameObject.getPosition().getX()-100,(int)gameObject.getPosition().getY()+100);
     }
 }

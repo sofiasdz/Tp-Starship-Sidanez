@@ -19,6 +19,7 @@ public class GameObjectManager {
         private List<Ammunition> ammo;
         private CollisionChecker collisionChecker;
         private Player winner;
+        private  GameOverScreen gameOverScreen;
 
 
 
@@ -35,8 +36,8 @@ public class GameObjectManager {
         }
 
         private void createPlayer(int number,String nickname){
-            Score score = new Score(vector(1000, 250*number), vector(0, -1), nickname, 0);
-            Life life=new Life(vector(900, 200*number), vector(0, -1),3);
+            Score score = new Score(vector(300+((number-1)*500), 700), vector(0, -1), nickname, 0);
+            Life life=new Life(vector(300+240+((number-1)*500), 700), vector(0, -1),3);
              List<Ammunition> ammo = new ArrayList<Ammunition>();
              Weapon weapon = new StandardWeapon(vector(200, 200*number), vector(0, -1), ammo,number);
             Starship starship = new Starship(vector(200, 200*number), vector(0, -1), 50, weapon,number);
@@ -153,18 +154,16 @@ public class GameObjectManager {
     private void manageStarships(){
         for (int i = 0; i <starships.size() ; i++) {
             Starship starship=starships.get(i);
-            System.out.println(starship.getIsDestroyed());
             if(starship.getIsDestroyed()){
                 if (starship.destroyedBy!=-1) {
                     int destroyedBy = starship.destroyedBy;
-                    System.out.println(destroyedBy);
                     Score score = players.get(destroyedBy - 1).score;
-                    System.out.println(destroyedBy);
                     score.setPoints(score.getPoints()+ 5);
                 }
                 Life life= players.get(i).getLife();
                 if( life.getLives()-1<0){
-                    starships.remove(starships);
+                    starships.remove(starship);
+                    checkForWinner();
 
                 }else {
                     players.get(i).getLife().setLives(life.getLives() - 1);
@@ -202,7 +201,7 @@ public class GameObjectManager {
 
     public void  drawGameObjects(DrawerManager drawerManager, PGraphics graphics){
             getAmmo();
-            drawerManager.draw(graphics,starships,asteroids,ammo,getPlayersScores(),getPlayersLives());
+            drawerManager.draw(graphics,starships,asteroids,ammo,getPlayersScores(),getPlayersLives(),gameOverScreen);
 
     }
 
@@ -253,6 +252,23 @@ public class GameObjectManager {
 
         }
         return lives;
+    }
+
+
+    public void setGameOverScreen(){
+            gameOverScreen=new GameOverScreen(winner.getNickname(),winner.getScore().getPoints(),vector(300, 300), vector(0, -1));
+            asteroids=new ArrayList<>();
+            starships=new ArrayList<>();
+            players=new ArrayList<>();
+            ammo=new ArrayList<>();
+
+    }
+
+    public void checkForWinner(){
+        if (starships.size()==1){
+            winner=players.get(starships.get(0).playerNumber-1);
+            setGameOverScreen();
+        }
     }
 
 

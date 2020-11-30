@@ -21,4 +21,8 @@ public class Player {
     public Life getLife() {
         return life;
     }
+
+    public String getNickname() {
+        return nickname;
+    }
 }
