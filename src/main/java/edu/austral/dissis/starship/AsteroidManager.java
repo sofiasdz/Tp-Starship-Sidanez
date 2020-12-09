@@ -36,23 +36,7 @@ public class AsteroidManager {
         return asteroids;
 
     }
-    public List<Asteroid> spawnAsteroids(int quantity){
-        List<Asteroid> asteroids=new ArrayList<>();
-        for (int i = 0; i <quantity ; i++) {
-            int asteroidSize = ThreadLocalRandom.current().nextInt(0, 2 + 1);
-            if (asteroidSize==0) asteroidSize=10;
-            if(asteroidSize==1) asteroidSize=50;
-            else asteroidSize=100;
-            Vector2 position=generateRandomPosition();
-            Vector2 direction=generateRandomDirection(position);
 
-            Asteroid asteroid = new Asteroid(position, direction, asteroidSize);
-            asteroids.add(asteroid);
-
-        }
-        return asteroids;
-
-    }
     public Asteroid spawnAsteroid(){
 
             int asteroidSize = ThreadLocalRandom.current().nextInt(0, 2 + 1);
@@ -63,8 +47,6 @@ public class AsteroidManager {
             Vector2 direction=generateRandomDirection(position);
 
             return new Asteroid(position, direction, asteroidSize);
-
-
 
     }
 
@@ -132,7 +114,7 @@ public class AsteroidManager {
 
 
 
-     public void manageCornerCollision(Asteroid asteroid,List<Asteroid> asteroids){
+     private void manageCornerCollision(Asteroid asteroid,List<Asteroid> asteroids){
          float x=asteroid.getPosition().getX();
          float y=asteroid.getPosition().getY();
          if (x>screenArea.width && y<0 ){

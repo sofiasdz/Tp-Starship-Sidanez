@@ -35,23 +35,4 @@ public class ScreenArea {
         return true;
     }
 
-    public boolean isInCorner(Vector2 position){
-        float x=position.getX();
-        float y=position.getY();
-        if (x>width && y<0 ){
-            //corner arriba derecha
-
-        }
-        if(x>width && y>height){
-            //corner abajo derecha
-        }
-        if (x<0 &&y<0){
-            //corner arriba izquierda
-        }
-        if(x<0 && y>height){
-            //abajo izquierda
-        }
-        return true;
-
-    }
 }

@@ -5,7 +5,7 @@ import processing.core.PGraphics;
 
 import java.util.List;
 
-public class DrawerManagerImpl  {
+public class DrawerManagerImpl implements DrawerManager {
     private PGraphics pGraphics;
     private StarshipDrawer starshipDrawer;
     private AsteroidDrawer asteroidDrawer;
@@ -28,7 +28,7 @@ public class DrawerManagerImpl  {
 
 
     }
-    void draw(List<GameObject> gameObjects,PGraphics graphics){
+    public void draw(List<GameObject> gameObjects, PGraphics graphics){
         this.pGraphics=graphics;
         for (int i = 0; i <gameObjects.size() ; i++) {
             if(gameObjects.get(i)!=null) {

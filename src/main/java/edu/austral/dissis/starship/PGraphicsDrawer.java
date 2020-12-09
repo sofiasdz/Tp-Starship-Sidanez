@@ -9,4 +9,5 @@ public abstract class PGraphicsDrawer {
     public  float calculateRotation(GameObject gameObject) {
         return gameObject.getDirection().rotate(PConstants.PI / 2).getAngle();
     }
+
 }

@@ -31,4 +31,6 @@ public class LifeDrawer extends PGraphicsDrawer {
         System.out.println(life.getLives());
         graphics.text("Lives: "+life.getLives(),(int)gameObject.getPosition().getX(),(int)gameObject.getPosition().getY());
     }
+
+
 }
