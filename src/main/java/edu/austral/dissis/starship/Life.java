@@ -22,6 +22,11 @@ public class Life implements GameObject {
         return 0;
     }
 
+    @Override
+    public void draw(DrawerManager drawerManager) {
+        drawerManager.draw(this);
+    }
+
     public int getLives() {
         return lives;
     }

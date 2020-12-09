@@ -17,6 +17,7 @@ public class CustomGameFramework implements GameFramework {
 
  GameObjectManager gameObjectManager;
  DrawerManager drawerManager;
+ ScreenArea screenArea;
 
 
     @Override
@@ -30,12 +31,13 @@ public class CustomGameFramework implements GameFramework {
             playerNames.add(name);
 
         }
-        gameObjectManager=new GameObjectManager();
-        drawerManager=new DrawerManager();
-        gameObjectManager.setUp(numberOfPlayers,playerNames);
-        drawerManager.setUp(imageLoader);
         windowsSettings
                 .setSize(1280, 720);
+        screenArea=new ScreenArea(1280,720);
+        gameObjectManager=new GameObjectManager();
+        drawerManager=new DrawerManager();
+        gameObjectManager.setUp(numberOfPlayers,playerNames,screenArea);
+        drawerManager.setUp(imageLoader);
 
     }
 

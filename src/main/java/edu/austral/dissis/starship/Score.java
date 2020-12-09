@@ -23,6 +23,11 @@ public class Score  implements  GameObject{
         return 0;
     }
 
+    @Override
+    public void draw(DrawerManager drawerManager) {
+        drawerManager.draw(this);
+    }
+
     public Score(Vector2 position, Vector2 direction, String playerNick, int points) {
         this.position = position;
         this.direction = direction;

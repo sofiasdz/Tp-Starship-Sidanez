@@ -28,6 +28,11 @@ public class StandardWeapon  extends Weapon implements Identifiable {
         return 0;
     }
 
+    @Override
+    public void draw(DrawerManager drawerManager) {
+
+    }
+
 
     public void shoot() {
         Ammunition ammunition = new StandardAmmunition(position, direction, 20,playerNumber);

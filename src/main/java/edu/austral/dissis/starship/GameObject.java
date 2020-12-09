@@ -6,6 +6,7 @@ public interface GameObject {
     Vector2 getPosition();
     Vector2 getDirection();
     int getSize();
+    void draw(DrawerManager drawerManager);
 
 
 

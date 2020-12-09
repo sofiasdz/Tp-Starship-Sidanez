@@ -63,6 +63,11 @@ public class Starship  extends StarshipInterface implements Collisionable,Destro
         return size;
     }
 
+    @Override
+    public void draw(DrawerManager drawerManager) {
+        drawerManager.draw(this);
+    }
+
 
     public float calculateRotation() {
         return this.getDirection().rotate(PConstants.PI / 2).getAngle();

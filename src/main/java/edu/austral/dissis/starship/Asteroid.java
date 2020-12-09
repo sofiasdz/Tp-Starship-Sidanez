@@ -11,8 +11,8 @@ import java.awt.geom.Rectangle2D;
 
 public class Asteroid implements Movable,GameObject, Collisionable,Destroyable {
 
-    private final Vector2 position;
-    private final Vector2 direction;
+    private  Vector2 position;
+    private  Vector2 direction;
      int  size;
      private boolean isDestroyed;
      int destroyedBy;
@@ -53,6 +53,11 @@ public class Asteroid implements Movable,GameObject, Collisionable,Destroyable {
     @Override
     public int getSize() {
         return  size;
+    }
+
+    @Override
+    public void draw(DrawerManager drawerManager) {
+        drawerManager.draw(this);
     }
 
     @Override
@@ -118,5 +123,14 @@ public class Asteroid implements Movable,GameObject, Collisionable,Destroyable {
     @Override
     public int destroyedBy() {
         return  destroyedBy;
+    }
+
+
+    public void setDirection(Vector2 direction){
+        this.direction=direction;
+    }
+
+    public void setPosition(Vector2 position) {
+        this.position = position;
     }
 }
