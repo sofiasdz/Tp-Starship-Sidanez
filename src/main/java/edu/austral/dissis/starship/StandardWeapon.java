@@ -29,7 +29,7 @@ public class StandardWeapon  extends Weapon implements Identifiable {
     }
 
     @Override
-    public void draw(DrawerManager drawerManager) {
+    public void draw(DrawerManagerImpl drawerManagerImpl) {
 
     }
 

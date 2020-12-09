@@ -1,12 +1,9 @@
 package edu.austral.dissis.starship;
 
 import edu.austral.dissis.starship.base.collision.Collisionable;
-import edu.austral.dissis.starship.base.vector.Vector2;
-import processing.core.PConstants;
 import processing.core.PGraphics;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -187,7 +184,7 @@ public class GameObjectManager {
     }
 
 
-    public void drawGameObjects(DrawerManager drawerManager, PGraphics graphics) {
+    public void drawGameObjects(DrawerManagerImpl drawerManagerImpl, PGraphics graphics) {
         getAmmo();
         List<GameObject> list = new ArrayList<>();
         list.addAll(starships);
@@ -196,7 +193,7 @@ public class GameObjectManager {
         list.addAll(getPlayersScores());
         list.addAll(getPlayersLives());
         list.add(gameOverScreen);
-        drawerManager.draw(list, graphics);
+        drawerManagerImpl.draw(list, graphics);
 
     }
 

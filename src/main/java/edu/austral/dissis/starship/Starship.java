@@ -64,8 +64,8 @@ public class Starship  extends StarshipInterface implements Collisionable,Destro
     }
 
     @Override
-    public void draw(DrawerManager drawerManager) {
-        drawerManager.draw(this);
+    public void draw(DrawerManagerImpl drawerManagerImpl) {
+        drawerManagerImpl.draw(this);
     }
 
 

@@ -24,8 +24,8 @@ public class Score  implements  GameObject{
     }
 
     @Override
-    public void draw(DrawerManager drawerManager) {
-        drawerManager.draw(this);
+    public void draw(DrawerManagerImpl drawerManagerImpl) {
+        drawerManagerImpl.draw(this);
     }
 
     public Score(Vector2 position, Vector2 direction, String playerNick, int points) {

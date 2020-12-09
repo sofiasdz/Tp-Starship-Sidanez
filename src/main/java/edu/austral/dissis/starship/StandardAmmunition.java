@@ -28,8 +28,8 @@ public class StandardAmmunition extends Ammunition  {
     }
 
     @Override
-    public void draw(DrawerManager drawerManager) {
-        drawerManager.draw(this);
+    public void draw(DrawerManagerImpl drawerManagerImpl) {
+        drawerManagerImpl.draw(this);
     }
 
     public StandardAmmunition( Vector2 position, Vector2 direction, int size,int playerNumber) {

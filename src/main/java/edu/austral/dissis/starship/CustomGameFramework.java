@@ -5,7 +5,6 @@ import edu.austral.dissis.starship.base.framework.WindowSettings;
 import processing.core.PGraphics;
 import processing.event.KeyEvent;
 import javax.swing.JOptionPane;
-import javax.swing.JFrame;
 
 
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ import java.util.Set;
 public class CustomGameFramework implements GameFramework {
 
  GameObjectManager gameObjectManager;
- DrawerManager drawerManager;
+ DrawerManagerImpl drawerManagerImpl;
  ScreenArea screenArea;
 
 
@@ -35,16 +34,16 @@ public class CustomGameFramework implements GameFramework {
                 .setSize(1280, 720);
         screenArea=new ScreenArea(1280,720);
         gameObjectManager=new GameObjectManager();
-        drawerManager=new DrawerManager();
+        drawerManagerImpl =new DrawerManagerImpl();
         gameObjectManager.setUp(numberOfPlayers,playerNames,screenArea);
-        drawerManager.setUp(imageLoader);
+        drawerManagerImpl.setUp(imageLoader);
 
     }
 
     @Override
     public void draw(PGraphics graphics, float timeSinceLastDraw, Set<Integer> keySet) {
     gameObjectManager.handleUpdates(keySet);
-    gameObjectManager.drawGameObjects(drawerManager,graphics);
+    gameObjectManager.drawGameObjects(drawerManagerImpl,graphics);
 
 
     }

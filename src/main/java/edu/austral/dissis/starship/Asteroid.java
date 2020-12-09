@@ -56,8 +56,8 @@ public class Asteroid implements Movable,GameObject, Collisionable,Destroyable {
     }
 
     @Override
-    public void draw(DrawerManager drawerManager) {
-        drawerManager.draw(this);
+    public void draw(DrawerManagerImpl drawerManagerImpl) {
+        drawerManagerImpl.draw(this);
     }
 
     @Override

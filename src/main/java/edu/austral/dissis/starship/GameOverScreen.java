@@ -23,8 +23,8 @@ public class GameOverScreen implements GameObject {
     }
 
     @Override
-    public void draw(DrawerManager drawerManager) {
-        drawerManager.draw(this);
+    public void draw(DrawerManagerImpl drawerManagerImpl) {
+        drawerManagerImpl.draw(this);
     }
 
     public String getWinnerNickname() {
